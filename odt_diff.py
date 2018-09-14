@@ -52,7 +52,7 @@ def odt_compare(ref, doc):
             ref_id = style_id(ref.H[i]['style'], ref.style['paragraph'])
             doc_id = style_id(doc.H[i]['style'], doc.style['paragraph'])
             if ref_id != doc_id:
-                s += '<p>Título %2d "%s..." tiene estilo %s en lugar de %s.</p>' % (i, doc.H[i]['text'][:15],
+                s += '<p>Título "%s..." tiene estilo <tt>%s</tt> en lugar de <tt>%s</tt>.</p>' % (doc.H[i]['text'][:15],
                                                                                      doc_id, ref_id)
     except IndexError:
         pass
@@ -63,7 +63,7 @@ def odt_compare(ref, doc):
             ref_id = style_id(ref.P[i]['style'], ref.style['paragraph'])
             doc_id = style_id(doc.P[i]['style'], doc.style['paragraph'])
             if ref_id != doc_id:
-                s += '<p>Párrafo %2d "%s..." tiene estilo %s en lugar de %s.</p>' % (i, doc.P[i]['text'][:30],
+                s += '<p>Párrafo "%s..." tiene estilo <tt>%s</tt> en lugar de <tt>%s</tt>.</p>' % (doc.P[i]['text'][:30],
                                                                                       doc_id, ref_id)
     except IndexError:
         pass
