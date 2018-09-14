@@ -27,7 +27,7 @@ class UploadAndCheck(tornado.web.RequestHandler):
             fname = __UPLOADS__ + cname
             fh = open(fname, 'wb')
             fh.write(fileinfo['body'])
-            doc = OdtData( fname, par_prop, text_prop )
+            doc = OdtData( fname )
             if doc.err:
                 s = 'Error de lectura del fitxer\n'
             else:
