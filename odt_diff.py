@@ -40,8 +40,8 @@ def odt_compare(ref, doc):
     except AttributeError:
         num_ref_H = 0
 
-    if len(doc.H)!=len(ref.H):
-        s+= 'El documento tiene %d títulos en lugar de %d\n' % (len(doc.H), len(ref.H))
+    if num_doc_H != num_ref_H:
+        s+= 'El documento tiene %d títulos en lugar de %d\n' % (num_doc_H, num_ref_H)
 
     if len(doc.P)!=len(ref.P):
         s+= 'El documento tiene %d párrafos en lugar de %d\n' % (len(doc.P), len(ref.P))
