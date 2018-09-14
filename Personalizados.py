@@ -11,7 +11,7 @@ __UPLOADS__ = "uploads/"
 from odt_parse import OdtData
 from odt_diff import find_style_by_name
 
-ref_name = './libro_personalizados.odt'
+ref_name = './docs/libro_personalizados.odt'
 par_prop = ['backgroundcolor', 'textalign', 'marginleft', 'marginright', 'margintop', 'marginbottom', 'breakbefore']
 text_prop = ['fontsize', 'fontstyle', 'language']
 ref = OdtData(ref_name, par_prop, text_prop)
