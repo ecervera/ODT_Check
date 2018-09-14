@@ -30,8 +30,19 @@ def odt_compare(ref, doc):
         s+= 'El documento tiene %d títulos vacíos.\n' % doc.emptyHeadings
     if doc.emptyPars:
         s+= 'El documento tiene %d párrafos vacíos.\n' % doc.emptyPars
+
+    try:
+        num_doc_H = len(doc.H)
+    except AttributeError:
+        num_doc_H = 0
+    try:
+        num_ref_H = len(ref.H)
+    except AttributeError:
+        num_ref_H = 0
+
     if len(doc.H)!=len(ref.H):
         s+= 'El documento tiene %d títulos en lugar de %d\n' % (len(doc.H), len(ref.H))
+
     if len(doc.P)!=len(ref.P):
         s+= 'El documento tiene %d párrafos en lugar de %d\n' % (len(doc.P), len(ref.P))
         
