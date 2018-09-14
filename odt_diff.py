@@ -25,11 +25,11 @@ def find_par_by_text(plist, text):
 def odt_compare(ref, doc):
     s = ''
 
-    s += '\nEstructura\n----------\n'
+    s += '<h1>Estructura</h1>'
     if doc.emptyHeadings:
-        s+= 'El documento tiene %d títulos vacíos.\n' % doc.emptyHeadings
+        s+= '<p>El documento tiene %d títulos vacíos.</p>' % doc.emptyHeadings
     if doc.emptyPars:
-        s+= 'El documento tiene %d párrafos vacíos.\n' % doc.emptyPars
+        s+= '<p>El documento tiene %d párrafos vacíos.</p>' % doc.emptyPars
 
     try:
         num_doc_H = len(doc.H)
@@ -41,29 +41,29 @@ def odt_compare(ref, doc):
         num_ref_H = 0
 
     if num_doc_H != num_ref_H:
-        s+= 'El documento tiene %d títulos en lugar de %d\n' % (num_doc_H, num_ref_H)
+        s+= '<p>El documento tiene %d títulos en lugar de %d</p>' % (num_doc_H, num_ref_H)
 
     if len(doc.P)!=len(ref.P):
-        s+= 'El documento tiene %d párrafos en lugar de %d\n' % (len(doc.P), len(ref.P))
+        s+= '<p>El documento tiene %d párrafos en lugar de %d</p>' % (len(doc.P), len(ref.P))
         
-    s += '\nEstilos de títulos\n------------------\n'
+    s += '<h1>Estilos de títulos</h1>'
     try:
         for i in range(len(ref.H)):
             ref_id = style_id(ref.H[i]['style'], ref.style['paragraph'])
             doc_id = style_id(doc.H[i]['style'], doc.style['paragraph'])
             if ref_id != doc_id:
-                s += 'Título %2d "%s..." tiene estilo \n  %s en lugar de %s.\n\n' % (i, doc.H[i]['text'][:15],
+                s += '<p>Título %2d "%s..." tiene estilo %s en lugar de %s.</p>' % (i, doc.H[i]['text'][:15],
                                                                                      doc_id, ref_id)
     except IndexError:
         pass
 
     try:
-        s += '\nEstilos de párrafos\n-------------------\n'
+        s += '<h1>Estilos de párrafos</h1>'
         for i in range(len(ref.P)):
             ref_id = style_id(ref.P[i]['style'], ref.style['paragraph'])
             doc_id = style_id(doc.P[i]['style'], doc.style['paragraph'])
             if ref_id != doc_id:
-                s += 'Párrafo %2d "%s..." tiene estilo \n  %s en lugar de %s.\n\n' % (i, doc.P[i]['text'][:30],
+                s += '<p>Párrafo %2d "%s..." tiene estilo %s en lugar de %s.</p>' % (i, doc.P[i]['text'][:30],
                                                                                       doc_id, ref_id)
     except IndexError:
         pass
