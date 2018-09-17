@@ -66,25 +66,17 @@ def compare_style_attr(ref, doc, family, style_name, attr_list):
     
 def compare_style_attrs(ref, doc):
     s = '<h1>Comprovació del document <tt>libro_modificado</tt></h1>'
-    errors = 0
     
-    err = compare_style_attr(ref, doc, 'paragraph', 'Heading', 
+    output = compare_style_attr(ref, doc, 'paragraph', 'Heading', 
                        ['backgroundcolor', 'textalign'])
-    if err:
-        s += err
-        errors += 1
+    s += output
         
-    err = compare_style_attr(ref, doc, 'paragraph', 'Quotations', 
+    output = compare_style_attr(ref, doc, 'paragraph', 'Quotations', 
                        ['fontsize', 'fontstyle', 'textalign', 'marginleft', 'marginright', 'margintop', 'marginbottom'])
-    if err:
-        s += err
-        errors += 1
-
-    if not errors:
-        s += "<p>No s'han trobat errors.</p>"
+    s += output
     return s
-                       
-        
+
+
 class Userform(tornado.web.RequestHandler):
     def get(self):
         self.render("Modificado.html")
