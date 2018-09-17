@@ -27,11 +27,11 @@ def odt_compare(ref, doc):
 
     s += '<h1>Estructura</h1>'
     if doc.emptyHeadings:
-        s+= '<p>El documento tiene %d títulos vacíos.</p>' % doc.emptyHeadings
+        s+= '<p>El documento tiene %d títulos vacíos, debes eliminarlos.</p>' % doc.emptyHeadings
     if doc.emptyPars:
-        s+= '<p>El documento tiene %d párrafos vacíos.</p>' % doc.emptyPars
+        s+= '<p>El documento tiene %d párrafos vacíos, debes eliminarlos.</p>' % doc.emptyPars
     else:
-        s+= '<p>El documento no tiene párrafos vacíos.</p>'
+        s+= '<p>El documento no tiene párrafos vacíos, ¡muy bien!</p>'
 
     try:
         num_doc_H = len(doc.H)
@@ -43,39 +43,39 @@ def odt_compare(ref, doc):
         num_ref_H = 0
 
     if num_doc_H != num_ref_H:
-        s+= '<p>El documento tiene %d títulos en lugar de %d</p>' % (num_doc_H, num_ref_H)
+        s+= '<p>El documento tiene %d títulos en lugar de %d. Corrígelo para poder comprobar los estilos de título.</p>' % (num_doc_H, num_ref_H)
+    else:
+        s += '<p>El número de títulos es correcto.</p>'
+        s += '<h2>Estilos de títulos</h2>'
+        try:
+            diffs = 0
+            for i in range(len(ref.H)):
+                ref_id = style_id(ref.H[i]['style'], ref.style['paragraph'])
+                doc_id = style_id(doc.H[i]['style'], doc.style['paragraph'])
+                if ref_id != doc_id:
+                    s += '<p>El título "%s..." tiene estilo <tt>%s</tt> en lugar de <tt>%s</tt>.</p>' % (doc.H[i]['text'][:15], doc_id, ref_id)
+                    diffs += 1
+            if diffs == 0:
+                s += '<p>Todos los títulos tienen el estilo correcto.</p>'
+        except IndexError:
+            pass
 
     if len(doc.P)!=len(ref.P):
-        s+= '<p>El documento tiene %d párrafos en lugar de %d</p>' % (len(doc.P), len(ref.P))
+        s+= '<p>El documento tiene %d párrafos en lugar de %d. Corrígelo para poder comprobar los estilos de párrafo.</p>' % (len(doc.P), len(ref.P))
     else:
         s += '<p>El número de párrafos es correcto.</p>'
-        
-    s += '<h1>Estilos de títulos</h1>'
-    try:
-        diffs = 0
-        for i in range(len(ref.H)):
-            ref_id = style_id(ref.H[i]['style'], ref.style['paragraph'])
-            doc_id = style_id(doc.H[i]['style'], doc.style['paragraph'])
-            if ref_id != doc_id:
-                s += '<p>El título "%s..." tiene estilo <tt>%s</tt> en lugar de <tt>%s</tt>.</p>' % (doc.H[i]['text'][:15], doc_id, ref_id)
-                diffs += 1
-        if diffs == 0:
-            s += '<p>Todos los títulos tienen el estilo correcto.</p>'
-    except IndexError:
-        pass
-
-    s += '<h1>Estilos de párrafos</h1>'
-    try:
-        diffs = 0
-        for i in range(len(ref.P)):
-            ref_id = style_id(ref.P[i]['style'], ref.style['paragraph'])
-            doc_id = style_id(doc.P[i]['style'], doc.style['paragraph'])
-            if ref_id != doc_id:
-                s += '<p>El párrafo "%s..." tiene estilo <tt>%s</tt> en lugar de <tt>%s</tt>.</p>' % (doc.P[i]['text'][:30], doc_id, ref_id)
-                diffs += 1
-        if diffs == 0:
-            s += '<p>Todos los párrafos tienen el estilo correcto.</p>'
-    except IndexError:
-        pass
+        s += '<h2>Estilos de párrafos</h2>'
+        try:
+            diffs = 0
+            for i in range(len(ref.P)):
+                ref_id = style_id(ref.P[i]['style'], ref.style['paragraph'])
+                doc_id = style_id(doc.P[i]['style'], doc.style['paragraph'])
+                if ref_id != doc_id:
+                    s += '<p>El párrafo "%s..." tiene estilo <tt>%s</tt> en lugar de <tt>%s</tt>.</p>' % (doc.P[i]['text'][:30], doc_id, ref_id)
+                    diffs += 1
+            if diffs == 0:
+                s += '<p>Todos los párrafos tienen el estilo correcto.</p>'
+        except IndexError:
+            pass
     
     return s
