@@ -36,6 +36,7 @@ def compare_style_attr(ref, doc, family, style_name, attr_list):
     stref = find_style_by_name(ref.style[family], style_name)
     stdoc = find_style_by_name(doc.style[family], style_name)
     f = io.StringIO()
+    error = False
     if stdoc:
         for attr in attr_list:
             try:
@@ -43,10 +44,12 @@ def compare_style_attr(ref, doc, family, style_name, attr_list):
                 try:
                     val_doc = stdoc[attr]
                     if val_ref != val_doc:
-                        f.write('Estilo %s tiene %s <br>  %s en lugar de %s.<br><br>' % (sp_trans(style_name), sp_trans(attr),
+                        f.write('<p>Estilo %s tiene %s <br>  %s en lugar de %s.</p>' % (sp_trans(style_name), sp_trans(attr),
                                                                                      sp_trans(val_doc), sp_trans(val_ref)))
+                        error = True
                 except KeyError:
-                        f.write('Estilo %s no tiene %s definido.<br><br>' % (sp_trans(style_name), sp_trans(attr)))
+                        f.write('<p>Estilo %s no tiene %s definido.</p>' % (sp_trans(style_name), sp_trans(attr)))
+                        error = True
                 #except TypeError:
                 #        f.write('Estilo %s no está definido.\n\n' % (sp_trans(style_name)))
             except KeyError:
@@ -55,7 +58,10 @@ def compare_style_attr(ref, doc, family, style_name, attr_list):
                     errors.append(err)
                     print('Estilo %s no tiene %s definido en el fichero de referencia.' % (sp_trans(style_name), sp_trans(attr)))
     else:
-        f.write('Estilo %s no está definido.<br><br>' % (sp_trans(style_name)))
+        f.write('<p>Estilo %s no está definido.</p>' % (sp_trans(style_name)))
+        error = True
+    if not error:
+        f.write('<p>El estilo %s está definido correctamente.</p>')
     return f.getvalue()
     
 def compare_style_attrs(ref, doc):
@@ -75,7 +81,7 @@ def compare_style_attrs(ref, doc):
         errors += 1
 
     if not errors:
-        s += "No s'han trobat errors."
+        s += "<p>No s'han trobat errors.</p>"
     return s
                        
         
