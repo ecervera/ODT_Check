@@ -41,7 +41,8 @@ def compare_style_attr(ref, doc, family, style_name, attr_list):
                 val_ref = stref[attr]
                 try:
                     val_doc = stdoc[attr]
-                    f.write('<p>Estilo %s, propiedad %s, valor %s.</p>' % (sp_trans(style_name), sp_trans(attr), sp_trans(val_doc)))
+                    #f.write('<p>Estilo %s, propiedad %s, valor %s.</p>' %
+                    # (sp_trans(style_name), sp_trans(attr), sp_trans(val_doc)))
                     if val_ref != val_doc:
                         f.write('<p>El estilo %s tiene %s <br>  %s en lugar de %s.</p>' % (sp_trans(style_name), sp_trans(attr),
                                                                                      sp_trans(val_doc), sp_trans(val_ref)))
