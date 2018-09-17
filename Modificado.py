@@ -59,8 +59,9 @@ def compare_style_attr(ref, doc, family, style_name, attr_list):
     return f.getvalue()
     
 def compare_style_attrs(ref, doc):
-    s = '<h4>libro_personalizados</h4><br>'
+    s = '<h1>Comprovació del document <tt>libro_modificado</tt></h1>'
     errors = 0
+    
     err = compare_style_attr(ref, doc, 'paragraph', 'Heading', 
                        ['backgroundcolor', 'textalign'])
     if err:
