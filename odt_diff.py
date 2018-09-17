@@ -25,14 +25,20 @@ def find_par_by_text(plist, text):
 def odt_compare(ref, doc):
     s = ''
 
-    s += '<h1>Estructura</h1>'
-    if doc.emptyHeadings:
+    s += '<h1>Comprobación de <tt>libro_predefinidos</tt></h1>'
+    if doc.emptyHeadings == 1:
+        s+= '<p>El documento tiene %d título vacío, debes eliminarlo.</p>' % doc.emptyHeadings
+    elif doc.emptyHeadings > 1:
         s+= '<p>El documento tiene %d títulos vacíos, debes eliminarlos.</p>' % doc.emptyHeadings
-    if doc.emptyPars:
+    if doc.emptyPars == 1:
+        s+= '<p>El documento tiene %d párrafo vacío, debes eliminarlo.</p>' % doc.emptyPars
+    elif doc.emptyPars > 1:
         s+= '<p>El documento tiene %d párrafos vacíos, debes eliminarlos.</p>' % doc.emptyPars
     else:
         s+= '<p>El documento no tiene párrafos vacíos, ¡muy bien!</p>'
 
+    s += '<hr>'
+    
     try:
         num_doc_H = len(doc.H)
     except AttributeError:
@@ -59,6 +65,8 @@ def odt_compare(ref, doc):
                 s += '<p>Todos los títulos tienen el estilo correcto.</p>'
         except IndexError:
             pass
+
+    s += '<hr>'
 
     if len(doc.P)!=len(ref.P):
         s+= '<p>El documento tiene %d párrafos en lugar de %d. Corrígelo para poder comprobar los estilos de párrafo.</p>' % (len(doc.P), len(ref.P))
