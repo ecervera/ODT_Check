@@ -42,10 +42,10 @@ def compare_style_attr(ref, doc, family, style_name, attr_list):
                 try:
                     val_doc = stdoc[attr]
                     if val_ref != val_doc:
-                        f.write('Estilo %s tiene %s <br>  %s en lugar de %s.<br><br>' % (sp_trans(style_name), sp_trans(attr),
+                        f.write('<p>El estilo %s tiene %s <br>  %s en lugar de %s.</p>' % (sp_trans(style_name), sp_trans(attr),
                                                                                      sp_trans(val_doc), sp_trans(val_ref)))
                 except KeyError:
-                        f.write('Estilo %s no tiene %s definido.<br><br>' % (sp_trans(style_name), sp_trans(attr)))
+                        f.write('El estilo %s no tiene %s definido.</p>' % (sp_trans(style_name), sp_trans(attr)))
                 #except TypeError:
                 #        f.write('Estilo %s no está definido.\n\n' % (sp_trans(style_name)))
             except KeyError:
@@ -54,11 +54,11 @@ def compare_style_attr(ref, doc, family, style_name, attr_list):
                     errors.append(err)
                     print('Estilo %s no tiene %s definido en el fichero de referencia.' % (sp_trans(style_name), sp_trans(attr)))
     else:
-        f.write('Estilo %s no está definido.<br><br>' % (sp_trans(style_name)))
+        f.write('<p>El estilo %s no está definido.</p>' % (sp_trans(style_name)))
     return f.getvalue()
     
 def compare_style_attrs(ref, doc):
-    s = '<h4>libro_personalizados</h4><br>'
+    s = '<h1>Comprovació del document <tt>libro_personalizados</tt></h1>'
     errors = 0
     err = compare_style_attr(ref, doc, 'paragraph', 'Párrafo', 
                        ['fontsize', 'textalign'])
