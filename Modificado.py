@@ -61,7 +61,7 @@ def compare_style_attr(ref, doc, family, style_name, attr_list):
         f.write('<p>Estilo %s no está definido.</p>' % (sp_trans(style_name)))
         error = True
     if not error:
-        f.write('<p>El estilo %s está definido correctamente.</p>')
+        f.write('<p>El estilo %s está definido correctamente.</p>' % sp_trans(style_name))
     return f.getvalue()
     
 def compare_style_attrs(ref, doc):
