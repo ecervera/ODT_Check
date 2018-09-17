@@ -44,11 +44,11 @@ def compare_style_attr(ref, doc, family, style_name, attr_list):
                 try:
                     val_doc = stdoc[attr]
                     if val_ref != val_doc:
-                        f.write('<p>Estilo %s tiene %s <br>  %s en lugar de %s.</p>' % (sp_trans(style_name), sp_trans(attr),
+                        f.write('<p>El estilo %s tiene %s <br>  %s en lugar de %s.</p>' % (sp_trans(style_name), sp_trans(attr),
                                                                                      sp_trans(val_doc), sp_trans(val_ref)))
                         error = True
                 except KeyError:
-                        f.write('<p>Estilo %s no tiene %s definido.</p>' % (sp_trans(style_name), sp_trans(attr)))
+                        f.write('<p>El estilo %s no tiene %s definido.</p>' % (sp_trans(style_name), sp_trans(attr)))
                         error = True
                 #except TypeError:
                 #        f.write('Estilo %s no está definido.\n\n' % (sp_trans(style_name)))
@@ -56,9 +56,9 @@ def compare_style_attr(ref, doc, family, style_name, attr_list):
                 err = style_name + "_" + attr
                 if not err in errors:
                     errors.append(err)
-                    print('Estilo %s no tiene %s definido en el fichero de referencia.' % (sp_trans(style_name), sp_trans(attr)))
+                    print('El estilo %s no tiene %s definido en el fichero de referencia.' % (sp_trans(style_name), sp_trans(attr)))
     else:
-        f.write('<p>Estilo %s no está definido.</p>' % (sp_trans(style_name)))
+        f.write('<p>El estilo %s no está definido.</p>' % (sp_trans(style_name)))
         error = True
     if not error:
         f.write('<p>El estilo %s está definido correctamente.</p>' % sp_trans(style_name))
