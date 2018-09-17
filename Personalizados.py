@@ -5,9 +5,6 @@ import os, uuid
 
 __UPLOADS__ = "uploads/"
 
-#import sys
-#sys.path.append('..')
-
 from odt_parse import OdtData
 from odt_diff import find_style_by_name
 
@@ -132,5 +129,5 @@ application = tornado.web.Application([
 
 
 if __name__ == "__main__":
-    application.listen(8888)
+    application.listen(8890)
     tornado.ioloop.IOLoop.instance().start()
