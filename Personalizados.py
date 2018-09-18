@@ -60,7 +60,7 @@ def compare_style_attr(ref, doc, family, style_name, attr_list):
     return f.getvalue()
     
 def compare_style_attrs(ref, doc):
-    s = '<h1>Comprovació del document <tt>libro_personalizados</tt></h1>'
+    s = "<h1>Comprovació del document <tt>libro_personalizados</tt></h1><p><b>Atenció</b>: l'anàlisi no és exhaustiu, donat que només es poden comprovar automàticamente algunes característiques d'alguns estils.</p>"
     errors = 0
     err = compare_style_attr(ref, doc, 'paragraph', 'Párrafo', 
                        ['fontsize', 'textalign'])
